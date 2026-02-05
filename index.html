@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Wish for My Sister</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef, #ffecd2);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            color: #ff6b6b;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 1.2em;
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff5252;
+        }
+        .wish {
+            display: none;
+            margin-top: 30px;
+        }
+        .wish h2 {
+            color: #ff6b6b;
+            font-size: 2em;
+        }
+        .wish p {
+            font-size: 1.2em;
+            color: #333;
+        }
+        .cake-container {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+            animation: bounce 2s infinite;
+        }
+        .cake {
+            width: 300px;
+            max-width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .cake-name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            pointer-events: none;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        .balloons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: radial-gradient(circle, #ff6b6b, #ff5252);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 6s linear infinite;
+        }
+        .balloon:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .balloon:nth-child(2) { left: 20%; animation-delay: 1s; background: radial-gradient(circle, #4ecdc4, #44a08d); }
+        .balloon:nth-child(3) { left: 30%; animation-delay: 2s; background: radial-gradient(circle, #ffeaa7, #fab1a0); }
+        .balloon:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .balloon:nth-child(5) { left: 50%; animation-delay: 4s; background: radial-gradient(circle, #a29bfe, #6c5ce7); }
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-100px); }
+        }
+        .confetti {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: fall 3s linear infinite;
+        }
+        .confetti-piece:nth-child(odd) { background: #4ecdc4; }
+        .confetti-piece:nth-child(3n) { background: #ffeaa7; }
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="balloons">
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+    </div>
+    <div class="container">
+        <h1>Happy Birthday to My Sister!</h1>
+        <input type="text" id="sisterName" placeholder="Enter your name" required>
+        <br>
+        <button onclick="showWish()">Wish Her!</button>
+        <div class="wish" id="wish">
+            <h2>Happy Birthday, <span id="name"></span>! 🎉</h2>
+            <p>May your day be filled with joy, laughter, and all the love you deserve. You're the best sister ever! Here's to another amazing year ahead.</p>
+            <div class="cake-container">
+                <img src="https://cdn.pixabay.com/photo/2016/11/29/04/31/birthday-cake-1867092_1280.jpg" alt="Birthday Cake" class="cake">
+                <div class="cake-name" id="cakeName"></div>
+            </div>
+        </div>
+    </div>
+    <div class="confetti" id="confetti">
+        <!-- Confetti pieces will be added via JS -->
+    </div>
+
+    <script>
+        function showWish() {
+            const name = document.getElementById('sisterName').value.trim();
+            if (name === '') {
+                alert('Please enter your name!');
+                return;
+            }
+            document.getElementById('name').textContent = name;
+            document.getElementById('cakeName').textContent = name; // Add name to the cake
+            document.getElementById('wish').style.display = 'block';
+            document.getElementById('confetti').style.display = 'block';
+            
+            // Add confetti pieces
+            const confettiContainer = document.getElementById('confetti');
+            for (let i = 0; i < 50; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.animationDelay = Math.random() * 3 + 's';
+                confettiContainer.appendChild(piece);
+            }
+            
+            // Hide confetti after animation
+            setTimeout(() => {
+                confettiContainer.style.display = 'none';
+                confettiContainer.innerHTML = '';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
